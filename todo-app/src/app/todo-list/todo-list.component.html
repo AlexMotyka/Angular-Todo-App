@@ -1,6 +1,0 @@
-<input type="text" class="todo-input" placeholder="What needs to be done" [(ngModel)]="todoTitle" (keyup.enter)="addTodo()">
-
-<todo-item
-  *ngFor="let todo of todoService.todosFiltered()"
-  [todo]="todo"
-></todo-item>
