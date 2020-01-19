@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Todo } from 'todo';
+import { Todo } from './todo';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +14,13 @@ export class TodoService {
       'id': 1,
       'name': 'Finish assignment 1',
       'isEditing': false,
-      'isCompleted': false,
+      'isComplete': false,
     },
     {
       'id': 2,
       'name': 'Finish Capstone',
       'isEditing': false,
-      'isCompleted': false,
+      'isComplete': false,
     },
   ];
   constructor() { }

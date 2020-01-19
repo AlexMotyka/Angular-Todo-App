@@ -1,1 +1,9 @@
-<p>todo-item works!</p>
+<div class="todo-item">
+  <input type="checkbox" [(ngModel)]="todo.completed">
+  <div *ngIf="!todo.editing" class="todo-item-label" [ngClass]="{ 'isCompleted' : todo.isCompleted }">
+    {{ todo.name }}
+  </div>
+  <div class="remove-item">
+    &times;
+  </div>
+</div>
