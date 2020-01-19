@@ -5,7 +5,7 @@ import { Todo } from './todo';
   providedIn: 'root'
 })
 export class TodoService {
-  todoTitle: string = '';
+  todoName: string = '';
   idForTodo: number = 4;
   beforeEditCache: string = '';
   filter: string = 'all';
@@ -13,19 +13,19 @@ export class TodoService {
   todos: Todo[] = [
     {
       'id': 1,
-      'title': 'Finish Angular Screencast',
+      'name': 'Finish Angular Screencast',
       'completed': false,
       'editing': false,
     },
     {
       'id': 2,
-      'title': 'Take over world',
+      'name': 'Take over world',
       'completed': false,
       'editing': false,
     },
     {
       'id': 3,
-      'title': 'One more thing',
+      'name': 'One more thing',
       'completed': false,
       'editing': false,
     },
@@ -33,14 +33,10 @@ export class TodoService {
 
   constructor() { }
 
-  addTodo(todoTitle: string): void {
-    if (todoTitle.trim().length === 0) {
-      return;
-    }
-
+  addTodo(todoName: string): void {
     this.todos.push({
       id: this.idForTodo,
-      title: todoTitle,
+      name: todoName,
       completed: false,
       editing: false
     })
@@ -49,13 +45,13 @@ export class TodoService {
   }
 
   editTodo(todo: Todo): void {
-    this.beforeEditCache = todo.title;
+    this.beforeEditCache = todo.name;
     todo.editing = true;
   }
 
   doneEdit(todo: Todo): void {
-    if (todo.title.trim().length === 0) {
-      todo.title = this.beforeEditCache;
+    if (todo.name.trim().length === 0) {
+      todo.name = this.beforeEditCache;
     }
 
     this.anyRemainingModel = this.anyRemaining();
@@ -63,7 +59,7 @@ export class TodoService {
   }
 
   cancelEdit(todo: Todo): void {
-    todo.title = this.beforeEditCache;
+    todo.name = this.beforeEditCache;
     todo.editing = false;
   }
 

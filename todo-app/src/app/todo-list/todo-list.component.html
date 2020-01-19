@@ -1,3 +1,22 @@
 <p>Todo List App</p>
 <input type="text" class="todo-input" placeholder="What needs to be done" [(ngModel)]="todoName" (keyup.enter)="addTodo()">
-<todo-item></todo-item>
+<todo-item *ngFor="let todo of todoService.todosFiltered()" [todo]="todo">
+</todo-item>
+
+<div class="extra-container">
+  <div><label><input type="checkbox" (change)="todoService.checkAllTodos()"  [(ngModel)]="!todoService.anyRemainingModel"> Check All</label></div>
+  <div>{{ todoService.remaining() }} items left</div>
+</div>
+
+<div class="extra-container">
+  <div>
+    <button [ngClass]="{'active': todoService.filter === 'all'}" (click)="todoService.filter='all'">All</button>
+    <button [ngClass]="{'active': todoService.filter === 'active'}" (click)="todoService.filter='active'">Active</button>
+    <button [ngClass]="{'active': todoService.filter === 'completed'}" (click)="todoService.filter='completed'">Completed</button>
+  </div>
+
+  <div *ngIf="todoService.atLeastOneCompleted()">
+    <button (click)="todoService.clearCompleted()">Clear Completed</button>
+  </div>
+
+</div>
