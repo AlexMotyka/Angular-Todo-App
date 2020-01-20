@@ -9,7 +9,6 @@ export class TodoService {
   idForTodo: number = 4;
   beforeEditCache: string = '';
   filter: string = 'all';
-  anyRemainingModel: boolean = true;
   todos: Todo[] = [
     {
       'id': 1,
@@ -53,8 +52,6 @@ export class TodoService {
     if (todo.name.trim().length === 0) {
       todo.name = this.beforeEditCache;
     }
-
-    this.anyRemainingModel = this.anyRemaining();
     todo.editing = false;
   }
 
@@ -65,27 +62,6 @@ export class TodoService {
 
   deleteTodo(id: number): void {
     this.todos = this.todos.filter(todo => todo.id !== id);
-  }
-
-  remaining(): number {
-    return this.todos.filter(todo => !todo.completed).length;
-  }
-
-  atLeastOneCompleted(): boolean {
-    return this.todos.filter(todo => todo.completed).length > 0;
-  }
-
-  clearCompleted(): void {
-    this.todos = this.todos.filter(todo => !todo.completed);
-  }
-
-  checkAllTodos(): void {
-    this.todos.forEach(todo => todo.completed = (<HTMLInputElement>event.target).checked)
-    this.anyRemainingModel = this.anyRemaining();
-  }
-
-  anyRemaining(): boolean {
-    return this.remaining() !== 0;
   }
 
   todosFiltered(): Todo[] {
