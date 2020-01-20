@@ -7,8 +7,10 @@ import { Todo } from './todo';
 export class TodoService {
   todoName: string = '';
   idForTodo: number = 4;
-  beforeEditCache: string = '';
+
+  nameBeforeEdit: string = '';
   filter: string = 'all';
+
   todos: Todo[] = [
     {
       'id': 1,
@@ -44,19 +46,19 @@ export class TodoService {
   }
 
   editTodo(todo: Todo): void {
-    this.beforeEditCache = todo.name;
+    this.nameBeforeEdit = todo.name;
     todo.editing = true;
   }
 
   doneEdit(todo: Todo): void {
     if (todo.name.trim().length === 0) {
-      todo.name = this.beforeEditCache;
+      todo.name = this.nameBeforeEdit;
     }
     todo.editing = false;
   }
 
   cancelEdit(todo: Todo): void {
-    todo.name = this.beforeEditCache;
+    todo.name = this.nameBeforeEdit;
     todo.editing = false;
   }
 
