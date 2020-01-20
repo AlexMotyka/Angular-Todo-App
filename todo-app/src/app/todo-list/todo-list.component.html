@@ -3,8 +3,8 @@
 <todo-item *ngFor="let todo of todoService.todosFiltered()" [todo]="todo"></todo-item>
 <div class="extra-container">
   <div>
-    <button [ngClass]="{'active': todoService.filter === 'all'}" (click)="todoService.filter='all'">All</button>
-    <button [ngClass]="{'active': todoService.filter === 'active'}" (click)="todoService.filter='active'">Active</button>
-    <button [ngClass]="{'active': todoService.filter === 'completed'}" (click)="todoService.filter='completed'">Completed</button>
+    <button [ngClass]="{'active': todoService.searchCriteria === 'all'}" (click)="todoService.searchCriteria='all'">All</button>
+    <button [ngClass]="{'active': todoService.searchCriteria === 'active'}" (click)="todoService.searchCriteria='active'">Active</button>
+    <button [ngClass]="{'active': todoService.searchCriteria === 'completed'}" (click)="todoService.searchCriteria='completed'">Completed</button>
   </div>
 </div>

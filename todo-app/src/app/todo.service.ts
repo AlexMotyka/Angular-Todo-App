@@ -9,7 +9,7 @@ export class TodoService {
   idForTodo: number = 4;
 
   nameBeforeEdit: string = '';
-  filter: string = 'all';
+  searchCriteria: string = 'all';
 
   todos: Todo[] = [
     {
@@ -67,11 +67,11 @@ export class TodoService {
   }
 
   todosFiltered(): Todo[] {
-    if (this.filter === 'all') {
+    if (this.searchCriteria === 'all') {
       return this.todos;
-    } else if (this.filter === 'active') {
+    } else if (this.searchCriteria === 'active') {
       return this.todos.filter(todo => !todo.completed);
-    } else if (this.filter === 'completed') {
+    } else if (this.searchCriteria === 'completed') {
       return this.todos.filter(todo => todo.completed);
     }
 
