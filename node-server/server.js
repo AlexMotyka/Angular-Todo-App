@@ -1,9 +1,17 @@
 const express = require('express');
 const mysql = require('mysql');
+const Promise = require('promise');
 const app = express();
 const port = 3000
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', function (req, res) {
+  getTodos()
+  .then(function(todos, error) {
+        if(error) throw error;
+        console.log(todos);
+        res.send(todos);
+    });
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
@@ -14,26 +22,25 @@ const connection = mysql.createConnection({
   database : 'tododb'
 });
 
+connection.connect();
+
 function getTodos(filter){
-  response = [];
-  // default
-  var condition = "'completed' = 0 OR 'completed' = 1;"
+  return new Promise(function(resolve, reject) {
+    // default
+    var condition = "'completed' = 0 OR 'completed' = 1;"
 
-  if(filter === 'Completed'){
-    condition = "'completed' = 1;"
-  } else if(filter === 'Active'){
-    condition = "'completed' = 0;"
-  }
+    if(filter === 'Completed'){
+      condition = "'completed' = 1;"
+    } else if(filter === 'Active'){
+      condition = "'completed' = 0;"
+    }
 
-  connection.connect();
-  connection.query(`SELECT * FROM Todos WHERE ${condition}`, function (error, results, fields) {
-    if (error) throw error;
-    console.log('The solution is: ', results);
-    response = results;
+    connection.query(`SELECT * FROM Todos WHERE ${condition}`, function (error, results, fields) {
+      if (error) return reject(error);
+      // console.log('Result: ', results);
+      resolve(results);
+    });
   });
-  connection.end();
-
-  return response;
 }
 
 // getTodos();
