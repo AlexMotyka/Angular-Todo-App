@@ -1,8 +1,11 @@
 const express = require('express');
 const mysql = require('mysql');
 const Promise = require('promise');
+const bodyParser = require('body-parser')
 const app = express();
 const port = 3000
+// parse application/json
+app.use(bodyParser.json())
 
 app.get('/todos', function (req, res) {
   var filter = '';
@@ -13,6 +16,13 @@ app.get('/todos', function (req, res) {
         console.log(todos);
         res.send(todos);
     });
+})
+
+app.post('/todo', function (req, res) {
+  var name = req.body.name;
+  console.log('Name: ', name);
+  addTodo(name)
+  res.send('200');
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
@@ -45,4 +55,9 @@ function getTodos(filter){
   });
 }
 
-// getTodos();
+function addTodo(name){
+  connection.query(`INSERT INTO Todos (name) VALUES ('${name}');`, function (error, results, fields) {
+    if (error) throw error;
+    console.log('Added todo: ', results);
+  });
+}
