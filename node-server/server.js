@@ -14,16 +14,26 @@ const connection = mysql.createConnection({
   database : 'tododb'
 });
 
-function getTodos(){
+function getTodos(filter){
+  response = [];
+  // default
+  var condition = "'completed' = 0 OR 'completed' = 1;"
+
+  if(filter === 'Completed'){
+    condition = "'completed' = 1;"
+  } else if(filter === 'Active'){
+    condition = "'completed' = 0;"
+  }
 
   connection.connect();
-  connection.query('SELECT * FROM Todos;', function (error, results, fields) {
+  connection.query(`SELECT * FROM Todos WHERE ${condition}`, function (error, results, fields) {
     if (error) throw error;
     console.log('The solution is: ', results);
+    response = results;
   });
-
   connection.end();
 
+  return response;
 }
 
-getTodos();
+// getTodos();
