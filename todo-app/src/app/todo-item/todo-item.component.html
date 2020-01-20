@@ -4,7 +4,7 @@
     <div *ngIf="!todo.editing;" class="todo-item-label" [ngClass]="{ 'completed' : todo.completed }"
       (dblclick)="todoService.editTodo(todo)">{{ todo.name }}</div>
     <div *ngIf="todo.editing;">
-      <input type="text" [(ngModel)]="todo.name" (blur)="todoService.doneEdit(todo)" (keyup.enter)="todoService.doneEdit(todo)"
+      <input type="text" [(ngModel)]="todo.name" (keyup.enter)="todoService.doneEdit(todo)"
         (keyup.esc)="todoService.cancelEdit(todo)">
     </div>
   </div>

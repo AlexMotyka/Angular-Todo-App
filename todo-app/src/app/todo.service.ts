@@ -10,7 +10,7 @@ export class TodoService {
 
   nameBeforeEdit: string = '';
   searchCriteria: string = 'all';
-
+  //// TODO: this will become an empty array on init once the server is up
   todos: Todo[] = [
     {
       'id': 1,
@@ -35,6 +35,8 @@ export class TodoService {
   constructor() { }
 
   addTodo(todoName: string): void {
+
+    //// TODO: create POST query to create a new todo
     this.todos.push({
       id: this.idForTodo,
       name: todoName,
@@ -54,6 +56,7 @@ export class TodoService {
     if (todo.name.trim().length === 0) {
       todo.name = this.nameBeforeEdit;
     }
+    //TODO: create PUT query to update todo name by id
     todo.editing = false;
   }
 
@@ -63,15 +66,19 @@ export class TodoService {
   }
 
   deleteTodo(id: number): void {
+    // TODO: create a DELETE query to delete todo by id
     this.todos = this.todos.filter(todo => todo.id !== id);
   }
 
   todosFiltered(): Todo[] {
     if (this.searchCriteria === 'all') {
+      //// TODO: create GET query to return all todos
       return this.todos;
     } else if (this.searchCriteria === 'active') {
+      //// TODO: create GET query to return all uncompleted todos
       return this.todos.filter(todo => !todo.completed);
     } else if (this.searchCriteria === 'completed') {
+      //// TODO: create GET query to return all completed todos
       return this.todos.filter(todo => todo.completed);
     }
 
