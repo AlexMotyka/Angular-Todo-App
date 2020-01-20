@@ -4,8 +4,10 @@ const Promise = require('promise');
 const app = express();
 const port = 3000
 
-app.get('/', function (req, res) {
-  getTodos()
+app.get('/todos', function (req, res) {
+  var filter = '';
+  filter = req.query.filter;
+  getTodos(filter)
   .then(function(todos, error) {
         if(error) throw error;
         console.log(todos);
