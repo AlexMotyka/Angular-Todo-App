@@ -7,18 +7,23 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'root',
   database : 'tododb'
 });
 
-connection.connect();
+function getTodos(){
 
-connection.query('SELECT * FROM Todos;', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results);
-});
+  connection.connect();
+  connection.query('SELECT * FROM Todos;', function (error, results, fields) {
+    if (error) throw error;
+    console.log('The solution is: ', results);
+  });
 
-connection.end();
+  connection.end();
+
+}
+
+getTodos();
