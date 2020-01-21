@@ -37,7 +37,8 @@ app.delete('/todo/:id', function (req, res) {
 app.put('/todo', function (req, res) {
   var id = req.body.id;
   var name = req.body.name;
-  updateTodo(id, name)
+  var completed = req.body.completed;
+  updateTodo(id, name, completed)
   res.send('200')
 })
 
@@ -85,8 +86,8 @@ function deleteTodo(id){
   });
 }
 
-function updateTodo(id, name){
-  connection.query(`UPDATE Todos SET name = '${name}' WHERE id = '${id}';`, function (error, results, fields) {
+function updateTodo(id, name, completed){
+  connection.query(`UPDATE Todos SET name = '${name}', completed = '${completed}' WHERE id = '${id}';`, function (error, results, fields) {
     if (error) throw error;
     console.log('Updated todo: ', results);
   });
