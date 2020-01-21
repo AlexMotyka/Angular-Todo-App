@@ -25,6 +25,12 @@ app.post('/todo', function (req, res) {
   res.send('200');
 })
 
+app.delete('/todo', function (req, res) {
+  var id = req.body.id;
+  deleteTodo(id)
+  res.send('Got a DELETE request at /user')
+})
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 const connection = mysql.createConnection({
@@ -59,5 +65,12 @@ function addTodo(name){
   connection.query(`INSERT INTO Todos (name) VALUES ('${name}');`, function (error, results, fields) {
     if (error) throw error;
     console.log('Added todo: ', results);
+  });
+}
+
+function deleteTodo(id){
+  connection.query(`DELETE FROM Todos WHERE id = '${id}';`, function (error, results, fields) {
+    if (error) throw error;
+    console.log('Deleted todo: ', results);
   });
 }
