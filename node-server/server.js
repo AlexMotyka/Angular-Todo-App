@@ -15,7 +15,6 @@ app.get('/todos', function (req, res) {
   getTodos(filter)
   .then(function(todos, error) {
         if(error) throw error;
-        console.log(todos);
         res.send(todos);
     });
 })
@@ -38,7 +37,13 @@ app.put('/todo', function (req, res) {
   var id = req.body.id;
   var name = req.body.name;
   var completed = req.body.completed;
-  updateTodo(id, name, completed)
+  var completedInt;
+  if(completed==='false'){
+    completedInt = 0;
+  } else if(completed==='true'){
+    completedInt = 1;
+  }
+  updateTodo(id, name, completedInt)
   res.send('200')
 })
 
