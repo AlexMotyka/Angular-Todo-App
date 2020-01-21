@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors')
 const mysql = require('mysql');
 const Promise = require('promise');
 const bodyParser = require('body-parser')
@@ -6,6 +7,7 @@ const app = express();
 const port = 3000
 // parse application/json
 app.use(bodyParser.json())
+app.use(cors())
 
 app.get('/todos', function (req, res) {
   var filter = '';
@@ -28,7 +30,14 @@ app.post('/todo', function (req, res) {
 app.delete('/todo', function (req, res) {
   var id = req.body.id;
   deleteTodo(id)
-  res.send('Got a DELETE request at /user')
+  res.send('200')
+})
+
+app.put('/todo', function (req, res) {
+  var id = req.body.id;
+  var name = req.body.name;
+  updateTodo(id, name)
+  res.send('200')
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
@@ -55,7 +64,7 @@ function getTodos(filter){
 
     connection.query(`SELECT * FROM Todos WHERE ${condition}`, function (error, results, fields) {
       if (error) return reject(error);
-      // console.log('Result: ', results);
+      console.log('Result: ', results);
       resolve(results);
     });
   });
@@ -72,5 +81,12 @@ function deleteTodo(id){
   connection.query(`DELETE FROM Todos WHERE id = '${id}';`, function (error, results, fields) {
     if (error) throw error;
     console.log('Deleted todo: ', results);
+  });
+}
+
+function updateTodo(id, name){
+  connection.query(`UPDATE Todos SET name = '${name}' WHERE id = '${id}';`, function (error, results, fields) {
+    if (error) throw error;
+    console.log('Updated todo: ', results);
   });
 }
