@@ -12,28 +12,33 @@ export class TodoService {
   nameBeforeEdit: string = '';
   searchCriteria: string = 'all';
   //// TODO: this will become an empty array on init once the server is up
-  todos: Todo[] = [
-    {
-      'id': 1,
-      'name': 'Finish Angular Screencast',
-      'completed': false,
-      'editing': false,
-    },
-    {
-      'id': 2,
-      'name': 'Take over world',
-      'completed': false,
-      'editing': false,
-    },
-    {
-      'id': 3,
-      'name': 'One more thing',
-      'completed': false,
-      'editing': false,
-    },
-  ];
+  // todos: Todo[] = [
+  //   {
+  //     'id': 1,
+  //     'name': 'Finish Angular Screencast',
+  //     'completed': false,
+  //     'editing': false,
+  //   },
+  //   {
+  //     'id': 2,
+  //     'name': 'Take over world',
+  //     'completed': false,
+  //     'editing': false,
+  //   },
+  //   {
+  //     'id': 3,
+  //     'name': 'One more thing',
+  //     'completed': false,
+  //     'editing': false,
+  //   },
+  // ];
+  todos: Todo[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.http.get<any>('http://127.0.0.1:3000/todos').subscribe(data => {
+      this.todos = data;
+    });
+  }
 
   addTodo(todoName: string): void {
 
@@ -73,7 +78,6 @@ export class TodoService {
 
   todosFiltered(): Todo[] {
     if (this.searchCriteria === 'all') {
-      //// TODO: create GET query to return all todos
       return this.todos;
     } else if (this.searchCriteria === 'active') {
       //// TODO: create GET query to return all uncompleted todos
