@@ -55,8 +55,9 @@ export class TodoService {
   }
 
   deleteTodo(id: number): void {
-    // TODO: create a DELETE query to delete todo by id
+    console.log(id);
     this.todos = this.todos.filter(todo => todo.id !== id);
+    this.http.delete<any>(`http://127.0.0.1:3000/todo/${id}`).subscribe(data => {})
   }
 
   todosFiltered(): Todo[] {
