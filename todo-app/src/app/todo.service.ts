@@ -22,9 +22,6 @@ export class TodoService {
 
   addTodo(todoName: string): void {
 
-    this.http.post<any>('http://127.0.0.1:3000/todo', { "name": `${todoName}`}).subscribe(data => {
-
-    })
     this.todos.push({
       id: this.idForTodo,
       name: todoName,
@@ -33,6 +30,8 @@ export class TodoService {
     })
 
     this.idForTodo++;
+
+    this.http.post<any>('http://127.0.0.1:3000/todo', { "name": `${todoName}`}).subscribe(data => {})
   }
 
   editTodo(todo: Todo): void {
@@ -44,8 +43,10 @@ export class TodoService {
     if (todo.name.trim().length === 0) {
       todo.name = this.nameBeforeEdit;
     }
-    //TODO: create PUT query to update todo name by id
     todo.editing = false;
+
+    this.http.put<any>('http://127.0.0.1:3000/todo', {"id": todo.id, "name": `${todo.name}`}).subscribe(data => {})
+
   }
 
   cancelEdit(todo: Todo): void {
