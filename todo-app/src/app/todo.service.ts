@@ -11,27 +11,7 @@ export class TodoService {
 
   nameBeforeEdit: string = '';
   searchCriteria: string = 'all';
-  //// TODO: this will become an empty array on init once the server is up
-  // todos: Todo[] = [
-  //   {
-  //     'id': 1,
-  //     'name': 'Finish Angular Screencast',
-  //     'completed': false,
-  //     'editing': false,
-  //   },
-  //   {
-  //     'id': 2,
-  //     'name': 'Take over world',
-  //     'completed': false,
-  //     'editing': false,
-  //   },
-  //   {
-  //     'id': 3,
-  //     'name': 'One more thing',
-  //     'completed': false,
-  //     'editing': false,
-  //   },
-  // ];
+
   todos: Todo[] = [];
 
   constructor(private http: HttpClient) {
@@ -42,7 +22,9 @@ export class TodoService {
 
   addTodo(todoName: string): void {
 
-    //// TODO: create POST query to create a new todo
+    this.http.post<any>('http://127.0.0.1:3000/todo', { "name": `${todoName}`}).subscribe(data => {
+
+    })
     this.todos.push({
       id: this.idForTodo,
       name: todoName,
@@ -80,10 +62,8 @@ export class TodoService {
     if (this.searchCriteria === 'all') {
       return this.todos;
     } else if (this.searchCriteria === 'active') {
-      //// TODO: create GET query to return all uncompleted todos
       return this.todos.filter(todo => !todo.completed);
     } else if (this.searchCriteria === 'completed') {
-      //// TODO: create GET query to return all completed todos
       return this.todos.filter(todo => todo.completed);
     }
 
