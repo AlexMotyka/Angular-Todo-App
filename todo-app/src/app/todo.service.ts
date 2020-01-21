@@ -7,7 +7,7 @@ import { Todo } from './todo';
 })
 export class TodoService {
   todoName: string = '';
-  idForTodo: number = 4;
+  idForTodo: number;
 
   nameBeforeEdit: string = '';
   searchCriteria: string = 'all';
@@ -17,6 +17,7 @@ export class TodoService {
   constructor(private http: HttpClient) {
     this.http.get<any>('http://127.0.0.1:3000/todos').subscribe(data => {
       this.todos = data;
+      this.idForTodo = Math.max.apply(Math, this.todos.map(function(o) { return o.id; })) + 1;
     });
   }
 
@@ -45,7 +46,7 @@ export class TodoService {
     }
     todo.editing = false;
 
-    this.http.put<any>('http://127.0.0.1:3000/todo', {"id": todo.id, "name": `${todo.name}`}).subscribe(data => {})
+    this.http.put<any>('http://127.0.0.1:3000/todo', {"id": todo.id, "name": `${todo.name}`, "completed": `${!todo.completed}`}).subscribe(data => {})
 
   }
 
@@ -55,7 +56,6 @@ export class TodoService {
   }
 
   deleteTodo(id: number): void {
-    console.log(id);
     this.todos = this.todos.filter(todo => todo.id !== id);
     this.http.delete<any>(`http://127.0.0.1:3000/todo/${id}`).subscribe(data => {})
   }
