@@ -27,8 +27,9 @@ app.post('/todo', function (req, res) {
   res.send('200');
 })
 
-app.delete('/todo', function (req, res) {
-  var id = req.body.id;
+app.delete('/todo/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
   deleteTodo(id)
   res.send('200')
 })
