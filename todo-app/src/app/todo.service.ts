@@ -12,19 +12,19 @@ export class TodoService {
   nameBeforeEdit: string = '';
   searchCriteria: string = 'all';
 
-  ec2URL: string = 'http://ec2-54-82-237-215.compute-1.amazonaws.com:3000';
+  this.ec2URL: string = 'http://ec2-54-82-237-215.compute-1.amazonaws.com:3000';
 
   todos: Todo[] = [];
 
   constructor(private http: HttpClient) {
-    this.http.get<any>(`${ec2URL}/todos`).subscribe(data => {
+    this.http.get<any>(`${this.ec2URL}/todos`).subscribe(data => {
       this.todos = data;
     });
   }
 
   addTodo(todoName: string): void {
 
-    this.http.post<any>(`${ec2URL}/todo`, { "name": `${todoName}`}).subscribe(data => {
+    this.http.post<any>(`${this.ec2URL}/todo`, { "name": `${todoName}`}).subscribe(data => {
       this.nextId = data;
 
       this.todos.push({
@@ -47,7 +47,7 @@ export class TodoService {
     }
     todo.editing = false;
 
-    this.http.put<any>(`${ec2URL}/todo`, {"id": todo.id, "name": `${todo.name}`, "completed": `${!todo.completed}`}).subscribe(data => {})
+    this.http.put<any>(`${this.ec2URL}/todo`, {"id": todo.id, "name": `${todo.name}`, "completed": `${!todo.completed}`}).subscribe(data => {})
 
   }
 
@@ -58,7 +58,7 @@ export class TodoService {
 
   deleteTodo(id: number): void {
     this.todos = this.todos.filter(todo => todo.id !== id);
-    this.http.delete<any>(`${ec2URL}/todo/${id}`).subscribe(data => {})
+    this.http.delete<any>(`${this.ec2URL}/todo/${id}`).subscribe(data => {})
   }
 
   todosFiltered(): Todo[] {
