@@ -54,7 +54,7 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'root',
+  password : 'pass',
   database : 'tododb'
 });
 
