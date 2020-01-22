@@ -17,7 +17,7 @@ export class TodoService {
   todos: Todo[] = [];
 
   constructor(private http: HttpClient) {
-    this.http.get<any>('${URL}/todos').subscribe(data => {
+    this.http.get<any>(`${URL}/todos`).subscribe(data => {
       this.todos = data;
     });
   }
