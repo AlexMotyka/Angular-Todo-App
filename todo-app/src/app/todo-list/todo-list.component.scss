@@ -1,20 +1,19 @@
 .todo-input {
-  width: 100%;
-  padding: 10px 18px;
+  width: 98%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
   font-size: 18px;
   margin-bottom: 16px;
-
-  &:focus {
-    outline: 0;
-  }
 }
 
 .main-container{
   width: 25%;
   margin: 0 auto;
-  // align-items: center;
 }
+.title {
 
+}
 .extra-container {
   display: flex;
   align-items: center;
@@ -30,7 +29,7 @@ button {
   appearance: none;
 
   &:hover {
-    background: lightgreen;
+    background: #A1D021;
   }
 
   &:focus {
@@ -39,7 +38,7 @@ button {
 }
 
 .active {
-  background: lightgreen;
+  background: #49B33C;
 }
 
 // CSS Transitions
