@@ -12,19 +12,21 @@ export class TodoService {
   nameBeforeEdit: string = '';
   searchCriteria: string = 'all';
 
+  URL = 'http://ec2-54-82-237-215.compute-1.amazonaws.com:3000';
+
   todos: Todo[] = [];
 
   constructor(private http: HttpClient) {
-    this.http.get<any>('http://127.0.0.1:3000/todos').subscribe(data => {
+    this.http.get<any>('${URL}/todos').subscribe(data => {
       this.todos = data;
     });
   }
 
   addTodo(todoName: string): void {
 
-    this.http.post<any>('http://127.0.0.1:3000/todo', { "name": `${todoName}`}).subscribe(data => {
+    this.http.post<any>(`${URL}/todo`, { "name": `${todoName}`}).subscribe(data => {
       this.nextId = data;
-      
+
       this.todos.push({
         id: this.nextId,
         name: todoName,
@@ -45,7 +47,7 @@ export class TodoService {
     }
     todo.editing = false;
 
-    this.http.put<any>('http://127.0.0.1:3000/todo', {"id": todo.id, "name": `${todo.name}`, "completed": `${!todo.completed}`}).subscribe(data => {})
+    this.http.put<any>(`${URL}/todo`, {"id": todo.id, "name": `${todo.name}`, "completed": `${!todo.completed}`}).subscribe(data => {})
 
   }
 
@@ -56,7 +58,7 @@ export class TodoService {
 
   deleteTodo(id: number): void {
     this.todos = this.todos.filter(todo => todo.id !== id);
-    this.http.delete<any>(`http://127.0.0.1:3000/todo/${id}`).subscribe(data => {})
+    this.http.delete<any>(`${URL}/todo/${id}`).subscribe(data => {})
   }
 
   todosFiltered(): Todo[] {
