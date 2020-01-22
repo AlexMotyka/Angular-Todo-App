@@ -12,7 +12,7 @@ export class TodoService {
   nameBeforeEdit: string = '';
   searchCriteria: string = 'all';
 
-  this.ec2URL: string = 'http://ec2-54-82-237-215.compute-1.amazonaws.com:3000';
+  ec2URL: string = 'http://ec2-54-82-237-215.compute-1.amazonaws.com:3000';
 
   todos: Todo[] = [];
 
