@@ -21,14 +21,16 @@ app.get('/todos', function (req, res) {
 
 app.post('/todo', function (req, res) {
   var name = req.body.name;
-  console.log('Name: ', name);
   addTodo(name)
-  res.send('200');
+  .then(function(insertId, error) {
+        if(error) throw error;
+        console.log("Insert ID before sending: ", insertId);
+        res.send(insertId.toString());
+    });
 })
 
 app.delete('/todo/:id', function (req, res) {
   var id = req.params.id;
-  console.log(id);
   deleteTodo(id)
   res.send('200')
 })
@@ -78,9 +80,12 @@ function getTodos(filter){
 }
 
 function addTodo(name){
-  connection.query(`INSERT INTO Todos (name) VALUES ('${name}');`, function (error, results, fields) {
-    if (error) throw error;
-    console.log('Added todo: ', results);
+
+  return new Promise(function(resolve, reject) {
+    connection.query(`INSERT INTO Todos (name) VALUES ('${name}');`, function (error, results, fields) {
+      if (error) return reject(error);
+      resolve(results.insertId);
+    });
   });
 }
 
