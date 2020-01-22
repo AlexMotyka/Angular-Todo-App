@@ -2,18 +2,22 @@
   margin-bottom: 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-around;
 }
 
-.remove-item {
+.remove-todo {
   cursor: pointer;
-  margin-left: 14px;
 }
 
 .todo-item-label {
   padding: 10px;
   border: 1px solid white;
   margin-left: 12px;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.remove{
+  align-items: flex-end;
 }
 
 .completed {
