@@ -1,8 +1,8 @@
-### Todo App
+## Todo App
 
 This application allows you to record all of your tasks so you never lose track of what needs to get done. Simply connect to the frontend and input your todos one by one. The backend handles all of the operations allowing the user to create, edit, complete, and delete todos. Additionally the user can filter their todos to view all of them, only active todos, or only completed todos.
 
-## Node.js Server
+### Node.js Server
 
 This server is responsible for listening to requests from the frontend and interacting with the MySQL database. To run the server follow these steps:
 
@@ -11,14 +11,14 @@ This server is responsible for listening to requests from the frontend and inter
 
 The server will be deployed to port 3000 on your IP. If this port is already taken you can modify the code and select your own port.
 
-## Angular Frontend
+### Angular Frontend
 
 The Angular frontend is what the user interacts with. Here the todos can be created, viewed, sorted, edited, completed, and deleted. To run the frontend follow these steps:
 
 1. Cd into the todo-app folder
 2. Run $ ng serve --open --host 0.0.0.0 --port 4200 --disable-host-check
 
-## MySQL Database
+### MySQL Database
 
 For this project I used a MySQL database. To create this database follow these steps:
 
