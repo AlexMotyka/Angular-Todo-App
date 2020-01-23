@@ -25,7 +25,7 @@ The frontend will be deployed to port 4200 on your IP. If this port is already t
 For this project I used a MySQL database. To create this database follow these steps:
 
 1. Make sure MySQL is installed and then run it
-2. CREATE DATABASE tododb
+2. CREATE DATABASE tododb;
 3. CREATE TABLE Todos (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
     completed TINYINT(1) NOT NULL DEFAULT 0,
