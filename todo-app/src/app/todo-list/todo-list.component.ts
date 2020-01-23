@@ -18,6 +18,7 @@ export class TodoListComponent implements OnInit {
   }
 
   addTodo(): void {
+    // check if the name is empty
     if (this.todoName.trim().length === 0) {
       this.todoName = 'YOU FORGOT TO NAME ME';
     }
