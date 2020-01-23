@@ -1,4 +1,33 @@
-Todo App
+### Todo App
 
-SSH into EC2 instance. Run Node server using node server.js. Run Angular frontend using ng serve --open --host 0.0.0.0 --port 4200 --disable-host-check
+This application allows you to record all of your tasks so you never lose track of what needs to get done. Simply connect to the frontend and input your todos one by one. The backend handles all of the operations allowing the user to create, edit, complete, and delete todos. Additionally the user can filter their todos to view all of them, only active todos, or only completed todos.
+
+## Node.js Server
+
+This server is responsible for listening to requests from the frontend and interacting with the MySQL database. To run the server follow these steps:
+
+1. Cd into the node-server folder
+2. Run $ node server.js
+
+The server will be deployed to port 3000 on your IP. If this port is already taken you can modify the code and select your own port.
+
+## Angular Frontend
+
+The Angular frontend is what the user interacts with. Here the todos can be created, viewed, sorted, edited, completed, and deleted. To run the frontend follow these steps:
+
+1. Cd into the todo-app folder
+2. Run $ ng serve --open --host 0.0.0.0 --port 4200 --disable-host-check
+
+## MySQL Database
+
+For this project I used a MySQL database. To create this database follow these steps:
+
+1. Make sure MySQL is installed and then run it
+2. CREATE DATABASE tododb
+3. CREATE TABLE Todos (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    completed TINYINT(1) NOT NULL DEFAULT 0,
+    editing TINYINT(1) NOT NULL DEFAULT 0);
+    
+Note that you must also create a user for the tododb. The backend will use this user and password to connect to the database. In the server.js file, I left a placeholder user 'root' and placeholder password 'pass'; change these to whatever user and password you have created for the tododb.
 
