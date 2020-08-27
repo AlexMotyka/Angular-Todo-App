@@ -6,7 +6,9 @@ This application allows you to record all of your tasks so you never lose track 
 
 For this project I used a MySQL database. Make sure you have an installation of MySQL first (Instructions for Ubuntu can be found at https://support.rackspace.com/how-to/install-mysql-server-on-the-ubuntu-operating-system/). To create this database follow the steps below:
 
-``` CREATE DATABASE tododb; ```
+``` CREATE DATABASE tododb; ```  
+  
+``` USE tododb;```  
 
 ```
 CREATE TABLE Todos (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
