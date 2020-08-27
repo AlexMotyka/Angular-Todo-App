@@ -24,12 +24,16 @@ The frontend will be deployed to port 4200 on your IP. If this port is already t
 
 ### MySQL Database
 
-For this project I used a MySQL database. To create this database follow the steps below (make sure you have an installation of MySQL first).
+For this project I used a MySQL database. To create this database follow the steps below (make sure you have an installation of MySQL first).  
+
 ```CREATE DATABASE tododb;```
-`CREATE TABLE Todos (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+```
+CREATE TABLE Todos (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
     completed TINYINT(1) NOT NULL DEFAULT 0,
-    editing TINYINT(1) NOT NULL DEFAULT 0);```
+    editing TINYINT(1) NOT NULL DEFAULT 0);
+ ```
     
 Note that you must also create a user for the tododb. The backend will use this user and password to connect to the database. In the server.js file, I left a placeholder user 'root' and placeholder password 'pass'; change these to whatever user and password you have created for the tododb.
 
