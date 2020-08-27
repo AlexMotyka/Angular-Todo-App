@@ -6,9 +6,9 @@ This application allows you to record all of your tasks so you never lose track 
 
 This server is responsible for listening to requests from the frontend and interacting with the MySQL database. To run the server follow these steps:
 
-```cd Angular-Todo-App```
-```cd node-server```
-```node server.js```
+```cd Angular-Todo-App```  
+```cd node-server```  
+```node server.js```  
 
 The server will be deployed to port 3000 on your IP. If this port is already taken you can modify the port variable in the code and select your own port.
 
@@ -16,9 +16,9 @@ The server will be deployed to port 3000 on your IP. If this port is already tak
 
 The Angular frontend is what the user interacts with. Here the todos can be created, viewed, sorted, edited, completed, and deleted. To run the frontend follow these steps:
 
-```cd Angular-Todo-App```
-```cd todo-app```
-```ng serve --open --host 0.0.0.0 --port 4200 --disable-host-check```
+```cd Angular-Todo-App```  
+```cd todo-app```  
+```ng serve --open --host 0.0.0.0 --port 4200 --disable-host-check```  
 
 The frontend will be deployed to port 4200 on your IP. If this port is already taken you can modify step 2 from above to use an available port
 
