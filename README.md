@@ -1,6 +1,13 @@
 ## Todo App
 
-This application allows you to record all of your tasks so you never lose track of what needs to get done. Simply connect to the frontend and input your todos one by one. The backend handles all of the operations allowing the user to create, edit, complete, and delete todos. Additionally the user can filter their todos to view all of them, only active todos, or only completed todos.
+This application allows you to record all of your tasks so you never lose track of what needs to get done. Simply connect to the frontend and input your todos one by one. The backend handles all of the operations allowing the user to create, edit, complete, and delete todos. Additionally the user can filter their todos to view all of them, only active todos, or only completed todos. Below are some screenshots of the todo list:
+
+![Image of all todos](https://github.com/AlexMotyka/Angular-Todo-App/blob/master/Images/Screenshot%20from%202020-08-27%2017-22-34.png)  
+Viewing all todos  
+![Image of active todos](https://github.com/AlexMotyka/Angular-Todo-App/blob/master/Images/Screenshot%20from%202020-08-27%2017-23-13.png)  
+Filtering just active todos  
+![Image of completed todos](https://github.com/AlexMotyka/Angular-Todo-App/blob/master/Images/Screenshot%20from%202020-08-27%2017-23-13.png)  
+Filtering completed todos  
 
 ### MySQL Database
 
