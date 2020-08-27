@@ -13,7 +13,10 @@ export class TodoService {
   searchCriteria: string = 'all';
 
   // ec2 instance node server url
-  ec2URL: string = 'http://ec2-54-82-237-215.compute-1.amazonaws.com:3000';
+  // ec2URL: string = 'http://ec2-54-82-237-215.compute-1.amazonaws.com:3000';
+  ec2URL: string = 'http://localhost:3000';
+
+
 
   // local copy of the todos that is always identical to the database contents
   todos: Todo[] = [];
