@@ -4,7 +4,7 @@ This application allows you to record all of your tasks so you never lose track 
 
 ![Image of all todos](https://github.com/AlexMotyka/Angular-Todo-App/blob/master/Images/Screenshot%20from%202020-08-27%2017-22-34.png)  
 Viewing all todos  
-![Image of active todos](https://github.com/AlexMotyka/Angular-Todo-App/blob/master/Images/Screenshot%20from%202020-08-27%2017-23-13.png)  
+![Image of active todos](https://github.com/AlexMotyka/Angular-Todo-App/blob/master/Images/Screenshot%20from%202020-08-27%2017-23-31.png)  
 Filtering just active todos  
 ![Image of completed todos](https://github.com/AlexMotyka/Angular-Todo-App/blob/master/Images/Screenshot%20from%202020-08-27%2017-23-13.png)  
 Filtering completed todos  
