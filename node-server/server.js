@@ -14,22 +14,22 @@ app.use(cors())
 // API routes
 
 // get the desired todos given the filter (All, active, or completed)
-app.get('/todos', function (req, res) {
+app.get('/todos', (req, res) => {
   var filter = '';
   filter = req.query.filter;
   // retrieve the todos and send them as a response
   getTodos(filter)
-  .then(function(todos, error) {
+  .then((todos, error) => {
         if(error) throw error;
         res.send(todos);
     });
 })
 
 // create a todo
-app.post('/todo', function (req, res) {
+app.post('/todo', (req, res) => {
   var name = req.body.name;
   addTodo(name)
-  .then(function(insertId, error) {
+  .then((insertId, error) => {
         if(error) throw error;
         // send back the id of the created todo
         res.send(insertId.toString());
@@ -37,14 +37,14 @@ app.post('/todo', function (req, res) {
 })
 
 // delete a todo given its id
-app.delete('/todo/:id', function (req, res) {
+app.delete('/todo/:id', (req, res) => {
   var id = req.params.id;
   deleteTodo(id)
   res.send('200')
 })
 
 // update a todo's name, completion status given its id
-app.put('/todo', function (req, res) {
+app.put('/todo', (req, res) => {
   var id = req.body.id;
   var name = req.body.name;
   var completed = req.body.completed;
@@ -59,7 +59,7 @@ app.put('/todo', function (req, res) {
 })
 
 // start listening for requests
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Todo app listening on port ${port}!`))
 
 // make a connection with the database
 const connection = mysql.createConnection({
@@ -74,7 +74,7 @@ connection.connect();
 
 // get todos based on the filter
 function getTodos(filter){
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     // default is all todos
     var condition = "'completed' = 0 OR 'completed' = 1;"
 
@@ -84,7 +84,7 @@ function getTodos(filter){
       condition = "'completed' = 0;"
     }
 
-    connection.query(`SELECT * FROM Todos WHERE ${condition}`, function (error, results, fields) {
+    connection.query(`SELECT * FROM Todos WHERE ${condition}`, (error, results, fields) => {
       if (error) return reject(error);
       console.log('Result: ', results);
       resolve(results);
@@ -95,8 +95,8 @@ function getTodos(filter){
 // add a new todo given a name
 function addTodo(name){
 
-  return new Promise(function(resolve, reject) {
-    connection.query(`INSERT INTO Todos (name) VALUES ('${name}');`, function (error, results, fields) {
+  return new Promise((resolve, reject) => {
+    connection.query(`INSERT INTO Todos (name) VALUES ('${name}');`, (error, results, fields) => {
       if (error) return reject(error);
       resolve(results.insertId);
     });
@@ -105,7 +105,7 @@ function addTodo(name){
 
 // delete a todo given the id
 function deleteTodo(id){
-  connection.query(`DELETE FROM Todos WHERE id = '${id}';`, function (error, results, fields) {
+  connection.query(`DELETE FROM Todos WHERE id = '${id}';`, (error, results, fields) => {
     if (error) throw error;
     console.log('Deleted todo: ', results);
   });
@@ -113,7 +113,7 @@ function deleteTodo(id){
 
 // update a todo
 function updateTodo(id, name, completed){
-  connection.query(`UPDATE Todos SET name = '${name}', completed = '${completed}' WHERE id = '${id}';`, function (error, results, fields) {
+  connection.query(`UPDATE Todos SET name = '${name}', completed = '${completed}' WHERE id = '${id}';`, (error, results, fields) => {
     if (error) throw error;
     console.log('Updated todo: ', results);
   });
