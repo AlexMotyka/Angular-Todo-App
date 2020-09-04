@@ -63,9 +63,10 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 // make a connection with the database
 const connection = mysql.createConnection({
-  host     : 'localhost',
+  host     : 'todo-db.cvy6ggowmj2i.us-east-1.rds.amazonaws.com',
+  port     : '3306',
   user     : 'root',
-  password : 'pass',
+  password : 'password',
   database : 'tododb'
 });
 
