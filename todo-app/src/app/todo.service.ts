@@ -7,14 +7,13 @@ import { Todo } from './todo';
 })
 export class TodoService {
   todoName: string = '';
-  nextId: number;
 
   nameBeforeEdit: string = '';
   searchCriteria: string = 'all';
 
   // ec2 instance node server url
-  ec2URL: string = 'http://ec2-35-153-83-228.compute-1.amazonaws.com:3000';
-  // ec2URL: string = 'http://localhost:3000';
+  // ec2URL: string = 'http://ec2-35-153-83-228.compute-1.amazonaws.com:3000';
+  ec2URL: string = 'http://127.0.0.1:3000';
 
 
 
@@ -32,10 +31,10 @@ export class TodoService {
     // request the server create a todo
     this.http.post<any>(`${this.ec2URL}/todo`, { "name": `${todoName}`}).subscribe(data => {
       // the next id for the local todo is equal to the returned id from the server
-      this.nextId = data;
+      const id = data._id;
       // create a copy of the todo in the local array
       this.todos.push({
-        id: this.nextId,
+        _id: id,
         name: todoName,
         completed: false,
         editing: false
@@ -51,13 +50,17 @@ export class TodoService {
   doneEdit(todo: Todo): void {
     // make sure the name is not empty
     if (todo.name.trim().length === 0) {
-      // if it is revert to the name from before the edit
+      // if it is empty revert to the name from before the edit
       todo.name = this.nameBeforeEdit;
     }
     todo.editing = false;
     // request that the server updates the todo
-    this.http.put<any>(`${this.ec2URL}/todo`, {"id": todo.id, "name": `${todo.name}`, "completed": `${!todo.completed}`}).subscribe(data => {})
+    this.http.put<any>(`${this.ec2URL}/todo`, {"id": todo._id, "name": `${todo.name}`, "completed": `${todo.completed}`}).subscribe(data => {})
 
+  }
+
+  updateCompletion(todo: Todo): void {
+    this.http.put<any>(`${this.ec2URL}/todo`, {"id": todo._id, "name": `${todo.name}`, "completed": `${!todo.completed}`}).subscribe(data => {})
   }
 
   // cancel the edit due to a click away or escape key hit
@@ -68,7 +71,7 @@ export class TodoService {
 
   deleteTodo(id: number): void {
     // delete the local copy of the todo
-    this.todos = this.todos.filter(todo => todo.id !== id);
+    this.todos = this.todos.filter(todo => todo._id !== id);
     // request the server to delete the todo
     this.http.delete<any>(`${this.ec2URL}/todo/${id}`).subscribe(data => {})
   }
