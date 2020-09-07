@@ -15,7 +15,7 @@ app.use(cors())
 // start listening for requests
 app.listen(port, () => console.log(`Todo app listening on port ${port}!`))
 
-const connectionURL = 'mongodb://ec2-35-153-83-228.compute-1.amazonaws.com:27017/todo-app'
+const connectionURL = 'mongodb://127.0.0.1:27017/todo-app'
 
 mongoose.connect(connectionURL, {
   useNewUrlParser: true,
