@@ -17,8 +17,6 @@ app.listen(port, () => console.log(`Todo app listening on port ${port}!`))
 
 const connectionURL = 'mongodb://127.0.0.1:27017/todo-app'
 
-
-
 mongoose.connect(connectionURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
