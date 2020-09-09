@@ -64,7 +64,7 @@ app.post('/todo', (req, res) => {
 // delete a todo given its id
 app.delete('/todo/:id', (req, res) => {
   var id = req.params.id;
-  Task.deleteOne({ _id: id }, (err) => { })
+  Task.findByIdAndDelete(id, (err) => { })
 })
 
 // update a todo's name, completion status given its id
