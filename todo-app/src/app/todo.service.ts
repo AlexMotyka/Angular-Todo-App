@@ -12,8 +12,8 @@ export class TodoService {
   searchCriteria: string = 'all';
 
   // ec2 instance node server url
-  ec2URL: string = 'http://ec2-35-153-83-228.compute-1.amazonaws.com:3000';
-  // ec2URL: string = 'http://127.0.0.1:3000';
+  // ec2URL: string = 'http://ec2-35-153-83-228.compute-1.amazonaws.com:3000';
+  ec2URL: string = 'http://127.0.0.1:3000';
 
 
 
