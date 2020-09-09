@@ -6,7 +6,7 @@
     <input type="text" [(ngModel)]="todo.name" (keyup.enter)="todoService.doneEdit(todo)"
       (keyup.esc)="todoService.cancelEdit(todo)">
   </div>
-  <div class="remove-todo" (click)="todoService.deleteTodo(todo.name)">
+  <div class="remove-todo" (click)="todoService.deleteTodo(todo._id)">
     &times;
   </div>
 </div>

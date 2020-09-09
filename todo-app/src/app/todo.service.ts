@@ -69,11 +69,11 @@ export class TodoService {
     todo.editing = false;
   }
 
-  deleteTodo(name: string): void {
+  deleteTodo(id: number): void {
     // delete the local copy of the todo
-    this.todos = this.todos.filter(todo => todo.name !== name);
+    this.todos = this.todos.filter(todo => todo._id !== id);
     // request the server to delete the todo
-    this.http.delete<any>(`${this.ec2URL}/todo/${name}`).subscribe(data => {})
+    this.http.delete<any>(`${this.ec2URL}/todo/${id}`).subscribe(data => {})
   }
 
   // filter the todos based on the completion status
