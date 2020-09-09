@@ -21,9 +21,11 @@ For this project I used a MongoDB database. To install MongoDB and create the da
 
 This server is responsible for listening to requests from the frontend and interacting with the database. To run the server follow these steps:
 
-``` cd Angular-Todo-App/node-server  ```  
-``` chmod +x run-server.sh  ```  
-``` ./run-server.sh  ```  
+```shell
+cd Angular-Todo-App/node-server
+chmod +x run-server.sh
+./run-server.sh  
+```  
 
 
 The server will be deployed to port 3000 on your IP. If this port is already taken you can modify the port variable in the code and select your own port.
@@ -38,4 +40,3 @@ The Angular frontend is what the user interacts with. Here the todos can be crea
 ``` ng serve --open --host 0.0.0.0 --port 4200 --disable-host-check ```  
 
 The frontend will be deployed to port 4200 on your IP. If this port is already taken you can modify step 2 from above to use an available port
-
