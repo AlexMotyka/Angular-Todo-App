@@ -1,39 +1,19 @@
 const express = require('express');
 var cors = require('cors')
-const bodyParser = require('body-parser')
-const app = express();
-const port = 3000
+// this require statement starts the db connection
+require('./db/mongoose')
+const Task = require('./models/task')
+const Task = require('./models/user')
 
-const mongoose = require('mongoose')
-const { ObjectId } = require('mongodb')
+const app = express();
+const port = process.env.PORT || 3000
 
 // parse application/json
-app.use(bodyParser.json())
-// this sets response headers to allow cross origin requests
+app.use(express.json())
+// allow cross origin requests
 app.use(cors())
 
-// start listening for requests
 app.listen(port, () => console.log(`Todo app listening on port ${port}!`))
-
-const connectionURL = 'mongodb://127.0.0.1:27017/todo-app'
-
-mongoose.connect(connectionURL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-})
-
-const Task = mongoose.model('Task', {
-  name: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  completed: {
-    type: Boolean,
-    default: false
-  }
-})
 
 // API routes
 
@@ -42,7 +22,7 @@ app.get('/todos', (req, res) => {
   Task.find().then((todos) => {
     res.send(todos)
   }).catch((error) => {
-    throw (error)
+    res.status(400).send(error)
   })
 })
 
@@ -57,7 +37,7 @@ app.post('/todo', (req, res) => {
   task.save().then(() => {
     res.send(task)
   }).catch((error) => {
-    throw(error)
+    res.status(400).send(error)
   })
 })
 
