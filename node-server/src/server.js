@@ -3,7 +3,7 @@ var cors = require('cors')
 // this require statement starts the db connection
 require('./db/mongoose')
 const Task = require('./models/task')
-const Task = require('./models/user')
+const User = require('./models/user')
 
 const app = express();
 const port = process.env.PORT || 3000
@@ -22,7 +22,46 @@ app.get('/todos', (req, res) => {
   Task.find().then((todos) => {
     res.send(todos)
   }).catch((error) => {
-    res.status(400).send(error)
+    res.status(500).send()
+  })
+})
+
+// get todo by id
+app.get('/todo/:id', (req, res) => {
+  const _id = req.params.id
+
+  Task.findById(_id).then((todo) => {
+      if (!todo) {
+          return res.status(404).send()
+      }
+
+      res.send(todo)
+  }).catch((error) => {
+      res.status(500).send(error)
+  })
+})
+
+// get all users
+app.get('/users', (req, res) => {
+  User.find().then((users) => {
+    res.send(users)
+  }).catch((error) => {
+    res.status(500).send()
+  })
+})
+
+// get user by id
+app.get('/user/:id', (req, res) => {
+  const _id = req.params.id
+
+  User.findById(_id).then((user) => {
+      if (!user) {
+          return res.status(404).send()
+      }
+
+      res.send(user)
+  }).catch((error) => {
+      res.status(500).send(error)
   })
 })
 
@@ -40,10 +79,20 @@ app.post('/todo', (req, res) => {
     res.status(400).send(error)
   })
 })
+// create a user
+app.post('/user', (req, res) => {
+  const user = new User(req.body)
+
+  user.save().then(() => {
+      res.send(user)
+  }).catch((e) => {
+      res.status(400).send(e)
+  })
+})
 
 // delete a todo given its id
 app.delete('/todo/:id', (req, res) => {
-  var id = req.params.id;
+  const id = req.params.id;
   Task.findByIdAndDelete(id, (err) => { })
 })
 
