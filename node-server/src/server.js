@@ -91,11 +91,35 @@ app.post('/user', async (req, res) => {
   }
 })
 
-// delete a todo given its id
-app.delete('/todo/:id', (req, res) => {
-  const id = req.params.id;
-  Task.findByIdAndDelete(id, (err) => { })
+app.delete('/todo/:id', async (req, res) => {
+  try {
+      const todo = await Task.findByIdAndDelete(req.params.id)
+
+      if (!todo) {
+          res.status(404).send()
+      }
+
+      res.send(todo)
+  } catch (error) {
+      res.status(500).send()
+  }
 })
+
+app.delete('/user/:id', async (req, res) => {
+  try {
+      const user = await User.findByIdAndDelete(req.params.id)
+
+      if (!user) {
+          return res.status(404).send()
+      }
+
+      res.send(user)
+  } catch (e) {
+      res.status(500).send()
+  }
+})
+
+
 
 // update a todo given its id
 app.put('/todo/:id', async (req, res) => {
