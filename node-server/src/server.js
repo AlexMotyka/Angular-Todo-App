@@ -22,7 +22,7 @@ app.get('/todos', async (req, res) => {
   try {
     const tasks = await Task.find()
     res.send(tasks)
-  } catch(error){
+  } catch (error) {
     res.status(500).send()
   }
 })
@@ -97,14 +97,25 @@ app.delete('/todo/:id', (req, res) => {
   Task.findByIdAndDelete(id, (err) => { })
 })
 
+// update a todo given its id
 app.put('/todo/:id', async (req, res) => {
+  const updates = Object.keys(req.body)
+  const allowedUpdates = ['name', 'completed']
+  const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+  if (!isValidOperation) {
+    return res.status(400).send({ error: 'Invalid updates!' })
+  }
+
   try {
-    const todo = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    if (!todo){
-      res.status(404).send()
+    const todo = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+
+    if (!todo) {
+      return res.status(404).send()
     }
+
     res.send(todo)
   } catch (error) {
-    res.status(500).send()
+    res.status(400).send(error)
   }
 })
