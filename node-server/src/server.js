@@ -97,10 +97,14 @@ app.delete('/todo/:id', (req, res) => {
   Task.findByIdAndDelete(id, (err) => { })
 })
 
-// update a todo's name, completion status given its id
-app.put('/todo', (req, res) => {
-  var id = req.body.id;
-  var name = req.body.name;
-  var completed = req.body.completed;
-  Task.updateOne({ _id: id }, { name: name, completed: completed }, (err) => { })
+app.put('/todo/:id', async (req, res) => {
+  try {
+    const todo = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    if (!todo){
+      res.status(404).send()
+    }
+    res.send(todo)
+  } catch (error) {
+    res.status(500).send()
+  }
 })

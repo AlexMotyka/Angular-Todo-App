@@ -55,12 +55,12 @@ export class TodoService {
     }
     todo.editing = false;
     // request that the server updates the todo
-    this.http.put<any>(`${this.ec2URL}/todo`, {"id": todo._id, "name": `${todo.name}`, "completed": `${todo.completed}`}).subscribe(data => {})
+    this.http.put<any>(`${this.ec2URL}/todo/${todo._id}`, {"name": `${todo.name}`, "completed": `${todo.completed}`}).subscribe(data => {})
 
   }
 
   updateCompletion(todo: Todo): void {
-    this.http.put<any>(`${this.ec2URL}/todo`, {"id": todo._id, "name": `${todo.name}`, "completed": `${!todo.completed}`}).subscribe(data => {})
+    this.http.put<any>(`${this.ec2URL}/todo/${todo._id}`, {"name": `${todo.name}`, "completed": `${!todo.completed}`}).subscribe(data => {})
   }
 
   // cancel the edit due to a click away or escape key hit
