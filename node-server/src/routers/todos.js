@@ -1,12 +1,12 @@
 const express = require('express')
 const router = new express.Router()
-const Task = require('../models/task')
+const Todo = require('../models/todo')
 
 // get all todos
 router.get('/todos', async (req, res) => {
     try {
-        const tasks = await Task.find()
-        res.send(tasks)
+        const todos = await Todo.find()
+        res.send(todos)
     } catch (error) {
         res.status(500).send()
     }
@@ -17,7 +17,7 @@ router.get('/todo/:id', async (req, res) => {
     const _id = req.params.id
 
     try {
-        const todo = await Task.findById(_id)
+        const todo = await Todo.findById(_id)
         if (!todo) {
             return res.status(404).send()
         }
@@ -29,11 +29,11 @@ router.get('/todo/:id', async (req, res) => {
 
 // create a todo
 router.post('/todo', async (req, res) => {
-    const task = new Task(req.body)
+    const todo = new Todo(req.body)
 
     try {
-        const todo = await task.save()
-        res.send(todo)
+        const result = await todo.save()
+        res.status(201).send(result)
     } catch (error) {
         res.status(400).send(error)
     }
@@ -41,7 +41,7 @@ router.post('/todo', async (req, res) => {
 
 router.delete('/todo/:id', async (req, res) => {
     try {
-        const todo = await Task.findByIdAndDelete(req.params.id)
+        const todo = await Todo.findByIdAndDelete(req.params.id)
 
         if (!todo) {
             res.status(404).send()
@@ -64,7 +64,7 @@ router.put('/todo/:id', async (req, res) => {
     }
 
     try {
-        const todo = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+        const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
 
         if (!todo) {
             return res.status(404).send()

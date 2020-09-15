@@ -3,10 +3,10 @@ var cors = require('cors')
 // this require statement starts the db connection
 require('./db/mongoose')
 
-const Task = require('./models/task')
+const Todo = require('./models/todo')
 const User = require('./models/user')
 const userRouter = require('./routers/users')
-const taskRouter = require('./routers/tasks')
+const todoRouter = require('./routers/todos')
 
 const app = express();
 const port = process.env.PORT || 3000
@@ -15,7 +15,7 @@ const port = process.env.PORT || 3000
 app.use(express.json())
 app.use(cors())
 app.use(userRouter)
-app.use(taskRouter)
+app.use(todoRouter)
 
 app.listen(port, () => console.log(`Todo app listening on port ${port}!`))
 

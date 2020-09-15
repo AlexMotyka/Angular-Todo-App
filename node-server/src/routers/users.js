@@ -34,7 +34,7 @@ router.post('/user', async (req, res) => {
 
     try {
         const result = await user.save()
-        res.status(201).send(user)
+        res.status(201).send(result)
     } catch (error) {
         res.status(400).send(error)
     }
