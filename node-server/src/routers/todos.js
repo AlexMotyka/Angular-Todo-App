@@ -66,6 +66,9 @@ router.put('/todo/:id', async (req, res) => {
     try {
         const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
 
+        updates.forEach((update) => todo[update] = req.body[update])
+        await todo.save()
+
         if (!todo) {
             return res.status(404).send()
         }
