@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from 'src/app/todo.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'login',
@@ -13,7 +15,9 @@ export class LoginComponent implements OnInit {
   token: string;
   missingCredentials: boolean;
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.email = ""
@@ -29,11 +33,12 @@ export class LoginComponent implements OnInit {
     } else {
       this.todoService.loginUser(this.email, this.password).then((user) => {
         if (!user) {
-          // TODO: add a pop up alert
+          //TODO: add a pop up alert
           console.log("Login Failed!")
+        } else {
+          // console.log(this.todoService.user)
+          this.router.navigate(['/todos']);
         }
-        // console.log(user)
-        console.log(this.todoService.user)
       })
     }
   }
