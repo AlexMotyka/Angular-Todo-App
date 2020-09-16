@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Todo } from './todo';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import { Todo } from './todo';
 export class TodoService {
   todoName: string = '';
 
+  loggedIn: boolean = false;
   nameBeforeEdit: string = '';
   searchCriteria: string = 'all';
 
@@ -19,6 +21,7 @@ export class TodoService {
 
   // local copy of the todos that is always identical to the database contents
   todos: Todo[] = [];
+  user = {} as User;
 
   // runs on startup and populates the list with existing todos
   constructor(private http: HttpClient) {
@@ -87,5 +90,20 @@ export class TodoService {
     }
 
     return this.todos;
+  }
+
+  async loginUser(email: string, password: string) : Promise<User> {
+    try {
+      let response = await this.http.post<any>(`${this.ec2URL}/user/login`,{"email": `${email}`, "password": `${password}`})
+      .toPromise();
+      this.user.name = response.name;
+      this.user.email = response.email;
+      this.user._id = response._id;
+      this.user.password = response.password
+      return this.user
+    } catch (error) {
+      console.log(error)
+    }
+   
   }
 }
