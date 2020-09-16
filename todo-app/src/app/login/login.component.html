@@ -1,1 +1,17 @@
-<p>login works!</p>
+<div class="main-container">
+
+    <div class="title">
+      <h1>Todo List App</h1>
+    </div>
+  
+    <input type="text" class="todo-input" placeholder="Email" [(ngModel)]="email">
+    <input type="text" class="todo-input" placeholder="Password" [(ngModel)]="password">
+  
+    <div class="extra-container">
+      <div>
+        <button (click)="signup()"mat-raised-button>Sign Up</button>
+        <button (click)="login()"mat-raised-button>Login</button>
+      </div>
+    </div>
+  
+  </div>
