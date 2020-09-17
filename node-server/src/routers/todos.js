@@ -3,9 +3,9 @@ const router = new express.Router()
 const Todo = require('../models/todo')
 
 // get all todos
-router.get('/todos', async (req, res) => {
+router.get('/todos/:id', async (req, res) => {
     try {
-        const todos = await Todo.find()
+        const todos = await Todo.find({"userId" : `${req.params.id}`})
         res.send(todos)
     } catch (error) {
         res.status(500).send()

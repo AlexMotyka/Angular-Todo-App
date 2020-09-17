@@ -9,6 +9,11 @@ const Todo = mongoose.model('Todo', {
     completed: {
         type: Boolean,
         default: false
+    },
+    userId: {
+        type: String,
+        required: true,
+        trim: true
     }
 })
 
