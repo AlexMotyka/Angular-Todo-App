@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from 'src/app/todo.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'todo-list',
@@ -11,10 +12,14 @@ export class TodoListComponent implements OnInit {
 
   // stores the todo name the user types
   todoName: string;
-  constructor(private todoService: TodoService) { }
+  userID: string;
+  constructor(private todoService: TodoService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.todoName = '';
+    this.userID = this.route.snapshot.paramMap.get('id')
+    this.todoService.getTodos(this.userID)
   }
 
   addTodo(): void {
@@ -22,7 +27,7 @@ export class TodoListComponent implements OnInit {
     if (this.todoName.trim().length === 0) {
       this.todoName = 'YOU FORGOT TO NAME ME';
     }
-    this.todoService.addTodo(this.todoName);
+    this.todoService.addTodo(this.todoName, this.userID);
     this.todoName = '';
   }
 

@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
           //TODO: add a pop up alert
           console.log("Login Failed!")
         } else {
-          // console.log(this.todoService.user)
-          this.router.navigate(['/todos']);
+          console.log("Login comp: ", this.todoService.user)
+          this.router.navigate(['/todos', this.todoService.user._id]);
         }
       })
     }

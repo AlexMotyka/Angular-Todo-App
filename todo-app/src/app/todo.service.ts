@@ -24,15 +24,17 @@ export class TodoService {
   user = {} as User;
 
   // runs on startup and populates the list with existing todos
-  constructor(private http: HttpClient) {
-    this.http.get<any>(`${this.ec2URL}/todos`).subscribe(data => {
+  constructor(private http: HttpClient) {}
+
+  getTodos(userId: string): void{
+    this.http.get<any>(`${this.ec2URL}/todos/${userId}`).subscribe(data => {
       this.todos = data;
     });
   }
 
-  addTodo(todoName: string): void {
+  addTodo(todoName: string, userId: string): void {
     // request the server create a todo
-    this.http.post<any>(`${this.ec2URL}/todo`, { "name": `${todoName}`}).subscribe(data => {
+    this.http.post<any>(`${this.ec2URL}/todo`, { "name": `${todoName}`, "userId": `${userId}`}).subscribe(data => {
       // the next id for the local todo is equal to the returned id from the server
       const id = data._id;
       // create a copy of the todo in the local array
@@ -44,6 +46,7 @@ export class TodoService {
       })
     })
   }
+  
   // save the name of the todo in case the user cancels the edit
   editTodo(todo: Todo): void {
     this.nameBeforeEdit = todo.name;
@@ -100,6 +103,7 @@ export class TodoService {
       this.user.email = response.email;
       this.user._id = response._id;
       this.user.password = response.password
+      console.log("Service login: ", this.user)
       return this.user
     } catch (error) {
       console.log(error)

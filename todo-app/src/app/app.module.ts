@@ -13,7 +13,7 @@ import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'todos', component: TodoListComponent},
+  {path: 'todos/:id', component: TodoListComponent},
 ];
 
 @NgModule({
