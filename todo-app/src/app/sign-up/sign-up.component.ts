@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from 'src/app/todo.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AlertService } from '../_alert';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,9 +15,15 @@ export class SignUpComponent implements OnInit {
   password: string;
   missingCredentials: boolean;
 
+  options = {
+    autoClose: true,
+    keepAfterRouteChange: false
+  };
+
   constructor(private todoService: TodoService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    protected alertService: AlertService) { }
 
   ngOnInit() {
     this.name = ""
@@ -27,17 +34,16 @@ export class SignUpComponent implements OnInit {
 
   submit() {
     if ((this.email.trim().length === 0) || (this.password.trim().length === 0) || (this.name.trim().length === 0)){
-      // TODO: add a pop up alert
-      this.missingCredentials = true
+      this.alertService.error("Missing sign up info!")
     } else {
       this.todoService.signUpUser(this.name, this.email, this.password).then((response) => {
         if(!response._id) {
           if(response.error.errors.email){
-            console.log("Invalid email!")
+            this.alertService.error("Invalid email!", this.options)
           } else if(response.error.errors.password){
-            console.log("Invalid password!")
+            this.alertService.error("Password is to short!", this.options)
           } else {
-            console.log("Sign up failed!")
+            this.alertService.error("Sign up failed!")
           }
         } else {
           this.router.navigate(['/todos', response._id]);
