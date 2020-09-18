@@ -29,15 +29,18 @@ export class SignUpComponent implements OnInit {
     if ((this.email.trim().length === 0) || (this.password.trim().length === 0) || (this.name.trim().length === 0)){
       // TODO: add a pop up alert
       this.missingCredentials = true
-      console.log("Login failed!")
     } else {
-      this.todoService.signUpUser(this.name, this.email, this.password).then((user) => {
-        if (!user) {
-          //TODO: add a pop up alert
-          console.log("Login Failed!")
+      this.todoService.signUpUser(this.name, this.email, this.password).then((response) => {
+        if(!response._id) {
+          if(response.error.errors.email){
+            console.log("Invalid email!")
+          } else if(response.error.errors.password){
+            console.log("Invalid password!")
+          } else {
+            console.log("Sign up failed!")
+          }
         } else {
-          console.log("Login comp: ", this.todoService.user)
-          this.router.navigate(['/todos', this.todoService.user._id]);
+          this.router.navigate(['/todos', response._id]);
         }
       })
     }
