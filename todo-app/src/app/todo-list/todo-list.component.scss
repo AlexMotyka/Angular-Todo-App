@@ -22,7 +22,15 @@
   padding-top: 14px;
   margin-bottom: 14px;
 }
+.cancel {
+  &:hover {
+    background: #e21809;
+  }
 
+  &:focus {
+    outline: none;
+  }
+}
 button {
   font-size: 14px;
   background-color: white;

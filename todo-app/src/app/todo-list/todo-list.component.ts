@@ -14,7 +14,8 @@ export class TodoListComponent implements OnInit {
   todoName: string;
   userID: string;
   constructor(private todoService: TodoService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
     this.todoName = '';
@@ -29,6 +30,10 @@ export class TodoListComponent implements OnInit {
     }
     this.todoService.addTodo(this.todoName, this.userID);
     this.todoName = '';
+  }
+
+  logout() {
+    this.router.navigate(['']);
   }
 
 }
