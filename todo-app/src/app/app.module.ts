@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { RouterModule, Routes } from '@angular/router';
+import { AlertModule } from './_alert';
 
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    AlertModule,
     BrowserAnimationsModule,
     MatButtonModule,
     RouterModule.forRoot(appRoutes)
