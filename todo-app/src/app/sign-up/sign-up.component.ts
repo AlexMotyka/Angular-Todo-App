@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from 'src/app/todo.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  providers: [TodoService],
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class SignUpComponent implements OnInit {
+
+  name: string;
   email: string;
   password: string;
-  token: string;
   missingCredentials: boolean;
 
   constructor(private todoService: TodoService,
@@ -20,18 +19,19 @@ export class LoginComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.name = ""
     this.email = ""
     this.password = ""
     this.missingCredentials = false
   }
 
-  login() {
-    if ((this.email.trim().length === 0) || this.password.trim().length === 0){
+  submit() {
+    if ((this.email.trim().length === 0) || (this.password.trim().length === 0) || (this.name.trim().length === 0)){
       // TODO: add a pop up alert
       this.missingCredentials = true
       console.log("Login failed!")
     } else {
-      this.todoService.loginUser(this.email, this.password).then((user) => {
+      this.todoService.signUpUser(this.name, this.email, this.password).then((user) => {
         if (!user) {
           //TODO: add a pop up alert
           console.log("Login Failed!")
@@ -43,9 +43,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  signup(): void {
-    console.log("sign up!")
-    this.router.navigate(['/register']);
+  cancel() {
+    this.router.navigate(['']);
   }
 
 }
