@@ -99,14 +99,10 @@ export class TodoService {
     try {
       let response = await this.http.post<any>(`${this.ec2URL}/user/login`,{"email": `${email}`, "password": `${password}`})
       .toPromise();
-      this.user.name = response.name;
-      this.user.email = response.email;
-      this.user._id = response._id;
-      this.user.password = response.password
-      console.log("Service login: ", this.user)
-      return this.user
+      return response
     } catch (error) {
       console.log(error)
+      return error
     }
   }
 

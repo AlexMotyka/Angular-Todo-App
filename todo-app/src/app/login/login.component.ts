@@ -29,16 +29,14 @@ export class LoginComponent implements OnInit {
     if ((this.email.trim().length === 0) || this.password.trim().length === 0){
       // TODO: add a pop up alert
       this.missingCredentials = true
-      console.log("Login failed!")
     } else {
-      this.todoService.loginUser(this.email, this.password).then((user) => {
-        if (!user) {
-          //TODO: add a pop up alert
-          console.log("Login Failed!")
-        } else {
-          console.log("Login comp: ", this.todoService.user)
-          this.router.navigate(['/todos', this.todoService.user._id]);
-        }
+      this.todoService.loginUser(this.email, this.password).then((response) => {
+        // if login failed
+       if(!response._id) {
+         console.log("Login failed!")
+       } else {
+        this.router.navigate(['/todos', response._id]);
+       }
       })
     }
   }
