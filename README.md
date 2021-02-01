@@ -39,4 +39,4 @@ The Angular frontend is what the user interacts with. Here the todos can be crea
 ``` npm i ```  
 ``` ng serve --open --host 0.0.0.0 --port 4200 --disable-host-check ```  
 
-The frontend will be deployed to port 4200 on your IP. If this port is already taken you can modify step 2 from above to use an available port
+The frontend will be deployed to port 4200 on your IP. If this port is already taken you can modify the ng serve command from above to use an available port
